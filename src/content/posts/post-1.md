@@ -1,12 +1,15 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
+draft: false
 title: "My First Blog Post"
-pubDate: 2022-07-01
+publishDate: "2022-07-01"
 description: "This is the first post of my new Astro blog."
-author: "Astro Learner"
+author: "James Garcia"
 image:
-  url: "https://docs.astro.build/assets/full-logo-light.png"
-  alt: "The full Astro logo."
+  {
+    src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?&fit=crop&w=430&h=240",
+    alt: "full stack web development",
+  }
+category: "Rails"
 tags: ["astro", "blogging", "learning in public"]
 ---
 

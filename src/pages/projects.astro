@@ -4,37 +4,35 @@ import { Picture } from '@astrojs/image/components';
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from '../components/Container.astro';
 import Sectionhead from '../components/Sectionhead.astro';
-import BlogCard from '../components/BlogCard.astro';
 
-const pageTitle = "Posts";
+const pageTitle = "Projects";
 
-// Filter posts entries with 'draft: false' & date before current date
-const publishedPostsEntries = await getCollection("posts", ({ data }) => {
+// Filter projects entries with 'draft: false' & date before current date
+const publishedProjectsEntries = await getCollection("projects", ({ data }) => {
   return !data.draft && data.publishDate < new Date();
 });
 
 // Sort content entries by publication date
-publishedPostsEntries.sort(function (a, b) {
+publishedProjectsEntries.sort(function (a, b) {
   return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
 });
 ---
 <BaseLayout pageTitle={pageTitle}>
   <Container>
     <Sectionhead>
-      <Fragment slot="title">My Posts</Fragment>
-      <Fragment slot="subtitle">A collection of my posts.</Fragment>
+      <Fragment slot="title">My Projects</Fragment>
+      <Fragment slot="subtitle">A collection of my projects.</Fragment>
     </Sectionhead>
     <main class="mt-16">
       <ul class="grid gap-16 max-w-4xl mx-auto">
-      <BlogCard />
         {
-          publishedPostsEntries.map((postsPostEntry, index) => (
+          publishedProjectsEntries.map((projectsProjectEntry, index) => (
             <li>
-              <a href={`/posts/${postsPostEntry.slug}`}>
+              <a href={`/projects/${projectsProjectEntry.slug}`}>
                 <div class="grid md:grid-cols-2 gap-5 md:gap-10 items-center">
                   <Picture
-                    src={postsPostEntry.data.image.src}
-                    alt={postsPostEntry.data.image.alt}
+                    src={projectsProjectEntry.data.image.src}
+                    alt={projectsProjectEntry.data.image.alt}
                     sizes="(max-width: 800px) 100vw, 800px"
                     widths={[200, 400, 800]}
                     aspectRatio="16:9"
@@ -47,22 +45,22 @@ publishedPostsEntries.sort(function (a, b) {
                   />
                   <div>
                     <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
-                      {postsPostEntry.data.category}
+                      {projectsProjectEntry.data.category}
                     </span>
 
                     <h2 class="text-3xl font-semibold leading-snug tracking-tight mt-1 ">
-                      {postsPostEntry.data.title}
+                      {projectsProjectEntry.data.title}
                     </h2>
 
                     <div class="flex gap-2 mt-3">
                       <span class="text-gray-400">
-                        {postsPostEntry.data.author}
+                        {projectsProjectEntry.data.author}
                       </span>
                       <span class="text-gray-400">• </span>
                       <time
                         class="text-gray-400"
-                        datetime={postsPostEntry.data.publishDate.toISOString()}>
-                        {postsPostEntry.data.publishDate.toDateString()}
+                        datetime={projectsProjectEntry.data.publishDate.toISOString()}>
+                        {projectsProjectEntry.data.publishDate.toDateString()}
                       </time>
                     </div>
                   </div>

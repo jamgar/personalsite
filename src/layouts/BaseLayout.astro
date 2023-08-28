@@ -1,9 +1,13 @@
 ---
-import "../styles/global.css";
+import { SEO } from "astro-seo";
+import "@fontsource-variable/inter/index.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 const { pageTitle } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+const makeTitle = pageTitle ? 'James Garcia | ' + pageTitle : 'James Garcia';
 ---
 
 <html lang="en">
@@ -12,15 +16,26 @@ const { pageTitle } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
+    <SEO
+      title={makeTitle}
+      description="This my personal website - James Garcia."
+      canonical={canonicalURL}
+      openGraph={{
+        basic: {
+          url: canonicalURL,
+          title: "My personal website",
+          type: "website",
+          image: "https://https://avatars.githubusercontent.com/u/14931684?v=4",
+        }
+      }}
+      twitter={{
+        creator: "@jamgar2020"
+      }}
+    />
   </head>
   <body>
     <Header />
-    <h1>{pageTitle}</h1>
     <slot />
     <Footer />
-    <script>
-      import "../scripts/menu.js";
-    </script>
   </body>
 </html>

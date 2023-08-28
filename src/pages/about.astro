@@ -1,49 +1,36 @@
 ---
+import Container from "../components/Container.astro";
+import Sectionhead from "../components/Sectionhead.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "About Me";
 
-const identity = {
-  firstName: "Sarah",
-  country: "Canada",
-  occupation: "Technical Writer",
-  hobbies: ["photography", "birdwatching", "baseball"],
-};
-
 const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 
-const happy = true;
-const finished = true;
-const goal = 3;
-
-const skillColor = "navy";
-const fontWeight = "bold";
-const textCase = "uppercase";
 ---
-<style define:vars={{skillColor, fontWeight, textCase}}>
-  .skill {
-    color: var(--skillColor);
-    font-weight: var(--fontWeight);
-    text-transform: var(--textCase);
-  }
-</style>
+
 <BaseLayout pageTitle={pageTitle}>
-  <p>Here are a few facts about me:</p>
-  <ul>
-    <li>My name is {identity.firstName}.</li>
-    <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
-    {identity.hobbies.length >= 2 &&
-      <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
-    }
-  </ul>
-  <p>My skills are:</p>
-  <ul>
-    {skills.map((skill) => <li class="skill">{skill}</li>)}
-  </ul>
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">About Me</Fragment>
+      <Fragment slot="desc"></Fragment>
+    </Sectionhead>
 
-  {happy && <p>I am happy to be learning Astro!</p>}
-
-  {finished && <p>I finished this tutorial!</p>}
-
-  {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
+    <div class="flex flex-col gap-3 mx-auto max-w-4xl mt-16">
+      <h2 class="font-bold text-3xl text-gray-800">
+        Hi 👋, I am James Garcia.
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        I have been in tech in some form of capacity for over 10 years. 
+        Still learning and still loving it. 
+        I am grateful to have been in this field because it has provided 
+        for me and my family. While I don't work as a full-time Rails 
+        developer I have created a Rails app Sharedwise. It is a blogging 
+        platform where a user creates a "Collection", which is basically an 
+        organizational unit, and then create post under the collection 
+        that are of a similar topic. People have different interest and so 
+        this will help them to have different collections based on those interest.
+      </p>
+    </div>
+  </Container>
 </BaseLayout>
